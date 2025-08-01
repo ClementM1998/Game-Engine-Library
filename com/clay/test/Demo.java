@@ -60,6 +60,9 @@ public class Demo extends GameApplication {
         if (IsKeyPressed(GameKeys.GK_RIGHT)) x+=8.5f;
         if (IsKeyPressed(GameKeys.GK_DOWN)) y+=8.5f;
         if (IsKeyPressed(GameKeys.GK_ESCAPE)) CloseWindow();
+        if (IsMouseButtonLeftPressed()) System.out.println("Mouse Button Left : " + IsMouseButtonLeftPressed());
+        if (IsMouseButtonMiddlePressed()) CloseWindow();
+        if (IsMouseButtonRightPressed()) System.out.println("Mouse Button Right : " + IsMouseButtonRightPressed());
 
         circle.setX(x);
         circle.setY(y);
