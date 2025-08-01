@@ -122,6 +122,46 @@ public abstract class GameApplication implements Runnable {
         return event.isKeyPressed(keys);
     }
 
+    public boolean IsMouseButtonLeftPressed() {
+        if (event == null) return false;
+        return event.isMouseButtonLeftPressed();
+    }
+
+    public boolean IsMouseButtonMiddlePressed() {
+        if (event == null) return false;
+        return event.isMouseButtonMiddlePressed();
+    }
+
+    public boolean IsMouseButtonRightPressed() {
+        if (event == null) return false;
+        return event.isMouseButtonRightPressed();
+    }
+
+    public boolean IsMouseButtonLeftClicked() {
+        if (event == null) return false;
+        return event.isMouseButtonLeftClicked();
+    }
+
+    public boolean IsMouseButtonMiddleClicked() {
+        if (event == null) return false;
+        return event.isMouseButtonMiddleClicked();
+    }
+
+    public boolean IsMouseButtonRightClicked() {
+        if (event == null) return false;
+        return event.isMouseButtonRightClicked();
+    }
+
+    public int GetMouseX() {
+        if (event == null) return 0;
+        return event.getMouseX();
+    }
+
+    public int GetMouseY() {
+        if (event == null) return 0;
+        return event.getMouseY();
+    }
+
     @Override
     public void run() {
         init(window);
