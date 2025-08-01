@@ -5,8 +5,12 @@ import java.util.HashSet;
 
 public class GameEvent implements KeyListener, MouseListener, MouseMotionListener {
     private final HashSet<Integer> keysPressed = new HashSet<>();
-    private boolean mousePressed = false;
-    private boolean mouseClicked = false;
+    private boolean mouseButtonLeftPressed = false;
+    private boolean mouseButtonMiddlePressed = false;
+    private boolean mouseButtonRightPressed = false;
+    private boolean mouseButtonLeftClicked = false;
+    private boolean mouseButtonMiddleClicked = false;
+    private boolean mouseButtonRightClicked = false;
     private int mousex = 0, mousey = 0;
 
     // KeyListener
@@ -28,17 +32,23 @@ public class GameEvent implements KeyListener, MouseListener, MouseMotionListene
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        mousePressed = true;
+        if (mouseEvent.getButton() == MouseEvent.BUTTON1) mouseButtonLeftPressed = true;
+        else if (mouseEvent.getButton() == MouseEvent.BUTTON2) mouseButtonMiddlePressed = true;
+        else if (mouseEvent.getButton() == MouseEvent.BUTTON3) mouseButtonRightPressed = true;
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        mousePressed = false;
+        if (mouseEvent.getButton() == MouseEvent.BUTTON1) mouseButtonLeftPressed = false;
+        else if (mouseEvent.getButton() == MouseEvent.BUTTON2) mouseButtonMiddlePressed = false;
+        else if (mouseEvent.getButton() == MouseEvent.BUTTON3) mouseButtonRightPressed = false;
     }
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        mouseClicked = true;
+        if (mouseEvent.getButton() == MouseEvent.BUTTON1) mouseButtonLeftClicked = true;
+        else if (mouseEvent.getButton() == MouseEvent.BUTTON2) mouseButtonMiddleClicked = true;
+        else if (mouseEvent.getButton() == MouseEvent.BUTTON3) mouseButtonRightClicked = true;
     }
 
     @Override
@@ -65,13 +75,33 @@ public class GameEvent implements KeyListener, MouseListener, MouseMotionListene
         return keysPressed.contains(keyCode);
     }
 
-    public boolean isMousePressed() {
-        return mousePressed;
+    public boolean isMouseButtonLeftPressed() {
+        return mouseButtonLeftPressed;
     }
 
-    public boolean isMouseClicked() {
-        boolean clicked = mouseClicked;
-        mouseClicked = false; // reset after read
+    public boolean isMouseButtonMiddlePressed() {
+        return mouseButtonMiddlePressed;
+    }
+
+    public boolean isMouseButtonRightPressed() {
+        return mouseButtonRightPressed;
+    }
+
+    public boolean isMouseButtonLeftClicked() {
+        boolean clicked = mouseButtonLeftClicked;
+        mouseButtonLeftClicked = false; // reset after read
+        return clicked;
+    }
+
+    public boolean isMouseButtonMiddleClicked() {
+        boolean clicked = mouseButtonMiddleClicked;
+        mouseButtonMiddleClicked = false; // reset after read
+        return clicked;
+    }
+
+    public boolean isMouseButtonRightClicked() {
+        boolean clicked = mouseButtonRightClicked;
+        mouseButtonRightClicked = false; // reset after read
         return clicked;
     }
 
@@ -82,5 +112,5 @@ public class GameEvent implements KeyListener, MouseListener, MouseMotionListene
     public int getMouseY() {
         return mousey;
     }
-    
+
 }
