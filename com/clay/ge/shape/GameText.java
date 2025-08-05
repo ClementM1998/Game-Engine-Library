@@ -1,10 +1,12 @@
 package com.clay.ge.shape;
 
 import com.clay.ge.render.GameBounds;
+import com.clay.ge.render.GameColor;
 import com.clay.ge.render.GameRender;
 import com.clay.ge.render.GameShape;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public class GameText extends GameShape {
     private float x, y;
@@ -14,6 +16,10 @@ public class GameText extends GameShape {
 
     public GameText() {
         setAntialias(true);
+    }
+
+    public GameText(GameColor color) {
+        setColor(color);
     }
 
     public GameText(String text, float x, float y) {
@@ -35,16 +41,20 @@ public class GameText extends GameShape {
         this.y = y;
     }
 
-    public String getText() {
-        return this.text;
-    }
-
     public float getX() {
         return this.x;
     }
 
     public float getY() {
         return this.y;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
     }
 
     public void setSize(float size) {
@@ -79,13 +89,47 @@ public class GameText extends GameShape {
 
         FontMetrics fm = g2.getFontMetrics();
         int ascent = fm.getAscent();
-        g2.setStroke(stroke());
+        g2.setStroke(strokeDraw());
         g2.drawString(text, (int) x, (int) ascent + y);
-    }
 
-    @Override
-    public Rectangle getBounds() {
-        return null;
+        g2.setColor(Color.YELLOW);
+        g2.setStroke(new BasicStroke(
+                0.1f,
+                BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_MITER,
+                5.f,
+                new float[] {2.5f, 2.5f},
+                0.f
+        ));
+
+        int xx = (int) (x - getStroke() / 2) - 2;
+        int yy = (int) (y - getStroke() / 2) - 2;
+        int xw = (int) (fm.stringWidth(text) + getStroke()) + 4;
+        int yh = (int) (fm.getAscent() + getStroke()) + 4;
+
+        //setBounds(new Rectangle(xx, yy, xw, yh));
+
+        Point a = new Point(xx, yy);
+        Point b = new Point(xx + xw, yy);
+        Point c = new Point(xx + xw, yy + yh);
+        Point d = new Point(xx, yy + yh);
+
+        GameBounds bounds = new GameBounds();
+
+        bounds.add(a);
+        bounds.add(b);
+        bounds.add(c);
+        bounds.add(d);
+
+        setBounds(bounds);
+
+        if (getBorderLine()) {
+            g2.drawLine(a.x, a.y, b.x, b.y);
+            g2.drawLine(b.x, b.y, c.x, c.y);
+            g2.drawLine(c.x, c.y, d.x, d.y);
+            g2.drawLine(d.x, d.y, a.x, a.y);
+        }
+
     }
 
 }
