@@ -1,6 +1,7 @@
 package com.clay.ge.shape;
 
 import com.clay.ge.render.GameBounds;
+import com.clay.ge.render.GameColor;
 import com.clay.ge.render.GameRender;
 import com.clay.ge.render.GameShape;
 
@@ -11,6 +12,10 @@ public class GameLine extends GameShape {
     private float x2, y2;
 
     public GameLine() {}
+
+    public GameLine(GameColor color) {
+        setColor(color);
+    }
 
     public GameLine(float x1, float y1, float x2, float y2) {
         this.x1 = x1;
@@ -66,13 +71,28 @@ public class GameLine extends GameShape {
         Graphics2D g2 = render.getGraphics();
         g2.setRenderingHints(getRenderingHints());
         g2.setColor(getColor().toAWTColor());
-        g2.setStroke(stroke());
+        g2.setStroke(strokeDraw());
         g2.drawLine((int) x1, (int) y1, (int) x2, (int) y2);
-    }
 
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle((int) x1, (int) y1, (int) x2, (int) y2);
+        g2.setColor(Color.YELLOW);
+        g2.setStroke(new BasicStroke(0.1f));
+
+        int xx1 = (int) x1;
+        int yy1 = (int) y1;
+        int xx2 = (int) x2;
+        int yy2 = (int) y2;
+
+        Point a = new Point(xx1, yy1);
+        Point b = new Point(xx2, yy2);
+
+        GameBounds bounds = new GameBounds();
+
+        bounds.add(a);
+        bounds.add(b);
+
+        setBounds(bounds);
+
+        g2.drawLine(a.x, a.y, b.x, b.y);
     }
 
 }
