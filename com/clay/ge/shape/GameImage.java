@@ -116,11 +116,45 @@ public class GameImage extends GameShape {
         if (loaded && image != null) {
             g2.drawImage(image, x, y, width, height, null);
         }
-    }
 
-    @Override
-    public Rectangle getBounds() {
-        return null;
+        g2.setColor(Color.YELLOW);
+        g2.setStroke(new BasicStroke(
+                0.1f,
+                BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_MITER,
+                5.f,
+                new float[] {2.5f, 2.5f},
+                0.f
+        ));
+
+        int xx = (int) (x - getStroke() / 2) - 2;
+        int yy = (int) (y - getStroke() / 2) - 2;
+        int xw = (int) (width + getStroke()) + 4;
+        int yh = (int) (height + getStroke()) + 4;
+
+        //setBounds(new Rectangle(xx, yy, xw, yh));
+
+        Point a = new Point(xx, yy);
+        Point b = new Point(xx + xw, yy);
+        Point c = new Point(xx + xw, yy + yh);
+        Point d = new Point(xx, yy + yh);
+
+        GameBounds bounds = new GameBounds();
+
+        bounds.add(a);
+        bounds.add(b);
+        bounds.add(c);
+        bounds.add(d);
+
+        setBounds(bounds);
+
+        if (getBorderLine()) {
+            g2.drawLine(a.x, a.y, b.x, b.y);
+            g2.drawLine(b.x, b.y, c.x, c.y);
+            g2.drawLine(c.x, c.y, d.x, d.y);
+            g2.drawLine(d.x, d.y, a.x, a.y);
+        }
+
     }
 
 }
