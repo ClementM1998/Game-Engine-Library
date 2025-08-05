@@ -21,6 +21,7 @@ public abstract class GameApplication implements Runnable {
 
     private JFrame frame = new JFrame();
     private boolean running = true;
+    private boolean showTitleFPS = false;
 
     public abstract void init(GameWindow window);
 
@@ -71,6 +72,14 @@ public abstract class GameApplication implements Runnable {
 
     public void SetBackgroundWindow(GameColor color) {
         window.setBackgroundColor(color);
+    }
+
+    public void ShowTitleFPS() {
+        this.showTitleFPS = true;
+    }
+
+    public void HideTitleFPS() {
+        this.showTitleFPS = false;
     }
 
     public String GetWindowTitle() {
@@ -170,6 +179,7 @@ public abstract class GameApplication implements Runnable {
         frame.setSize(window.getWidth(), window.getHeight());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(window.isResizable());
+//        frame.setUndecorated(true);
 
         // gunakan BorderLayout supaya canvas isi seluruh frame
         frame.setLayout(new BorderLayout());
@@ -202,7 +212,7 @@ public abstract class GameApplication implements Runnable {
             @Override
             public void componentResized(ComponentEvent e) {
                 Dimension size = panel.canvas().getSize();
-                System.out.println("Canvas resized to: " + size.width + "x" + size.height);
+                //System.out.println("Canvas resized to: " + size.width + "x" + size.height);
                 // di sini anda boleh update sistem rendering, camera, viewport dll
                 panel.canvas().setSize(size);
                 window.setSize(size.width, size.height);
@@ -239,7 +249,7 @@ public abstract class GameApplication implements Runnable {
             // Tunjuk FPS setiap saat
             if (System.currentTimeMillis() - timer >= 1000) {
                 System.out.println("FPS : " + frames);
-                frame.setTitle(window.getTitle() + " | FPS : " + frames);
+                if (showTitleFPS) frame.setTitle(window.getTitle() + " | FPS : " + frames);
                 frames = 0;
                 timer += 1000;
             }
