@@ -91,11 +91,11 @@ public class GameEvent implements KeyListener, MouseListener, MouseMotionListene
 
     public boolean isMouseButtonPressed(GameMouse mouse) {
         if (mouse == GameMouse.BUTTON_LEFT) {
-            return mouseButtonLeftClicked;
+            return mouseButtonLeftPressed;
         } else if (mouse == GameMouse.BUTTON_MIDDLE) {
-            return mouseButtonMiddleClicked;
+            return mouseButtonMiddlePressed;
         } else if (mouse == GameMouse.BUTTON_RIGHT) {
-            return mouseButtonRightClicked;
+            return mouseButtonRightPressed;
         } else return false;
     }
 
