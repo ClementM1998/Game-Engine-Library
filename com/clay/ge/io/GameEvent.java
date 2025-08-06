@@ -75,6 +75,7 @@ public class GameEvent implements KeyListener, MouseListener, MouseMotionListene
         return keysPressed.contains(keyCode);
     }
 
+    /*
     public boolean isMouseButtonLeftPressed() {
         return mouseButtonLeftPressed;
     }
@@ -86,7 +87,19 @@ public class GameEvent implements KeyListener, MouseListener, MouseMotionListene
     public boolean isMouseButtonRightPressed() {
         return mouseButtonRightPressed;
     }
+    */
 
+    public boolean isMouseButtonPressed(GameMouse mouse) {
+        if (mouse == GameMouse.BUTTON_LEFT) {
+            return mouseButtonLeftClicked;
+        } else if (mouse == GameMouse.BUTTON_MIDDLE) {
+            return mouseButtonMiddleClicked;
+        } else if (mouse == GameMouse.BUTTON_RIGHT) {
+            return mouseButtonRightClicked;
+        } else return false;
+    }
+
+    /*
     public boolean isMouseButtonLeftClicked() {
         boolean clicked = mouseButtonLeftClicked;
         mouseButtonLeftClicked = false; // reset after read
@@ -104,7 +117,22 @@ public class GameEvent implements KeyListener, MouseListener, MouseMotionListene
         mouseButtonRightClicked = false; // reset after read
         return clicked;
     }
-
+    */
+    public boolean isMouseButtonClicked(GameMouse mouse) {
+        boolean clicked = false;
+        if (mouse == GameMouse.BUTTON_LEFT) {
+            clicked = mouseButtonLeftClicked;
+            mouseButtonLeftClicked = false; // reset after read
+        } else if (mouse == GameMouse.BUTTON_MIDDLE) {
+            clicked = mouseButtonMiddleClicked;
+            mouseButtonMiddleClicked = false; // reset after read
+        } else if (mouse == GameMouse.BUTTON_RIGHT) {
+            clicked = mouseButtonRightClicked;
+            mouseButtonRightClicked = false; // reset after read
+        }
+        return clicked;
+    }
+    
     public int getMouseX() {
         return mousex;
     }
