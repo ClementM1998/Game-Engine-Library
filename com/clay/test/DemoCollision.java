@@ -20,6 +20,7 @@ public class DemoCollision extends GameApplication {
     private GameTriangle triangle = new GameTriangle();
     private float cx = 200, cy = 200, radius = 50;
     private float width, height;
+    private boolean collision = fasle;
     private float[] xpoint = {300, 325, 350}, ypoint = {150, 100, 150};
 
     @Override
