@@ -133,32 +133,32 @@ public abstract class GameApplication implements Runnable {
 
     public boolean IsMouseButtonLeftPressed() {
         if (event == null) return false;
-        return event.isMouseButtonLeftPressed();
+        return event.isMouseButtonPressed(GameMouse.BUTTON_LEFT);
     }
 
     public boolean IsMouseButtonMiddlePressed() {
         if (event == null) return false;
-        return event.isMouseButtonMiddlePressed();
+        return event.isMouseButtonPressed(GameMouse.BUTTON_MIDDLE);
     }
 
     public boolean IsMouseButtonRightPressed() {
         if (event == null) return false;
-        return event.isMouseButtonRightPressed();
+        return event.isMouseButtonPressed(GameMouse.BUTTON_RIGHT);
     }
 
     public boolean IsMouseButtonLeftClicked() {
         if (event == null) return false;
-        return event.isMouseButtonLeftClicked();
+        return event.isMouseButtonClicked(GameMouse.BUTTON_LEFT);
     }
 
     public boolean IsMouseButtonMiddleClicked() {
         if (event == null) return false;
-        return event.isMouseButtonMiddleClicked();
+        return event.isMouseButtonClicked(GameMouse.BUTTON_MIDDLE);
     }
 
     public boolean IsMouseButtonRightClicked() {
         if (event == null) return false;
-        return event.isMouseButtonRightClicked();
+        return event.isMouseButtonClicked(GameMouse.BUTTON_RIGHT);
     }
 
     public int GetMouseX() {
