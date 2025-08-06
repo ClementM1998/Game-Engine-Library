@@ -11,8 +11,8 @@ import com.clay.ge.shape.*;
 
 public class Demo extends GameApplication {
     private GameCircle circle = new GameCircle();
-    private GameRect rect = new GameRect();
-    private GameRect box = new GameRect();
+    private GameRectangle rect = new GameRectangle();
+    private GameRectangle box = new GameRectangle();
     private GameTriangle triangle = new GameTriangle();
     private GamePolygon polygon = new GamePolygon();
     private GamePoint point = new GamePoint();
