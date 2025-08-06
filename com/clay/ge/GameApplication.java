@@ -1,6 +1,7 @@
 package com.clay.ge;
 
 import com.clay.ge.io.GameKeys;
+import com.clay.ge.io.GameMouse;
 import com.clay.ge.render.GameColor;
 import com.clay.ge.ui.GamePanel;
 import com.clay.ge.ui.GameWindow;
