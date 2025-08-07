@@ -122,7 +122,7 @@ public class DemoCollision extends GameApplication {
     }
 
     public static void main(String[] args) {
-        launch(new Demo());
+        launch(new DemoCollision());
     }
 
 }
