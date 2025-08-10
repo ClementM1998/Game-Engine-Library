@@ -16,17 +16,18 @@ public class Demo extends GameApplication {
     @Override
     public void init(GameWindow window) {
         CreateWindow("Demos");
-
+        /* Write code here for init(GameWindow) */
     }
 
     @Override
     public void update(GameEvent event) {
+        /* Write code here for update(GameEvent) */
     }
 
     @Override
     public void render(GameRender render) {
         ClearWindow();
-
+        /* Write code here for render(GameRender) */
     }
 
     public static void main(String[] args) {
