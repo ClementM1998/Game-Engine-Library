@@ -3,6 +3,8 @@ package com.clay.ge;
 import com.clay.ge.io.GameKeys;
 import com.clay.ge.io.GameMouse;
 import com.clay.ge.render.GameColor;
+import com.clay.ge.render.GameShapeType;
+import com.clay.ge.shape.GameRectangle;
 import com.clay.ge.ui.GamePanel;
 import com.clay.ge.ui.GameWindow;
 import com.clay.ge.io.GameEvent;
@@ -75,6 +77,10 @@ public abstract class GameApplication implements Runnable {
         window.setBackgroundColor(color);
     }
 
+    public void SetFullscreenMode() {
+        window.setFullscreenMode();
+    }
+
     public void ShowTitleFPS() {
         this.showTitleFPS = true;
     }
@@ -132,6 +138,11 @@ public abstract class GameApplication implements Runnable {
         return event.isKeyPressed(keys);
     }
 
+    public String GetKeyText() {
+        if (event == null) return "";
+        return event.getKeyText();
+    }
+
     public boolean IsMouseButtonLeftPressed() {
         if (event == null) return false;
         return event.isMouseButtonPressed(GameMouse.BUTTON_LEFT);
@@ -178,9 +189,11 @@ public abstract class GameApplication implements Runnable {
 
         frame.setTitle(window.getTitle());
         frame.setSize(window.getWidth(), window.getHeight());
+
+        if (window.getFullscreenMode()) frame.setUndecorated(true);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(window.isResizable());
-//        frame.setUndecorated(true);
 
         // gunakan BorderLayout supaya canvas isi seluruh frame
         frame.setLayout(new BorderLayout());
@@ -221,6 +234,20 @@ public abstract class GameApplication implements Runnable {
             }
         });
 
+        if (window.getFullscreenMode()) {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            GraphicsDevice gd = ge.getDefaultScreenDevice();
+
+            if (gd.isFullScreenSupported()) {
+                try {
+                    gd.setFullScreenWindow(frame);
+                } catch (Exception e) {
+                    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                }
+            }
+
+        }
+
         frame.setVisible(window.isVisible());
 
         final int targetFPS = 60;
@@ -233,7 +260,7 @@ public abstract class GameApplication implements Runnable {
         while (running) {
             long now = System.nanoTime();
             if (now - lastTime >= frameTime) {
-                update(event);
+                //update(event);
                 BufferStrategy bs = panel.bufferStrategy();
                 if (bs == null) {
                     panel.createBufferStrategy(3);
@@ -242,6 +269,7 @@ public abstract class GameApplication implements Runnable {
                 Graphics g = bs.getDrawGraphics();
                 render.setGraphics(g);
                 render(render);
+                update(event);
                 g.dispose();
                 bs.show();
                 lastTime = now;
