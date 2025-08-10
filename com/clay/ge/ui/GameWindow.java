@@ -11,6 +11,7 @@ public class GameWindow {
     private boolean resizable = false;
     private boolean visible = true;
     private GameColor bgColor = GameColor.BLACK;
+    private boolean fullscreenmode = false;
 
     public void setTitle(String title) {
         this.title = title;
@@ -84,6 +85,14 @@ public class GameWindow {
 
     public GameColor getBackgroundColor() {
         return bgColor;
+    }
+
+    public void setFullscreenMode() {
+        this.fullscreenmode = true;
+    }
+
+    public boolean getFullscreenMode() {
+        return fullscreenmode;
     }
 
 }
