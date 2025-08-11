@@ -75,6 +75,16 @@ public class GameEvent implements KeyListener, MouseListener, MouseMotionListene
         return keysPressed.contains(keyCode);
     }
 
+    public String getKeyText() {
+        if (keysPressed.isEmpty()) return "";
+        StringBuilder sb = new StringBuilder();
+        for (int keyCode : keysPressed) {
+            if (sb.length() > 0) sb.append(", ");
+            sb.append(KeyEvent.getKeyText(keyCode));
+        }
+        return sb.toString();
+    }
+
     /*
     public boolean isMouseButtonLeftPressed() {
         return mouseButtonLeftPressed;
