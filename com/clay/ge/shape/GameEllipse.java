@@ -3,7 +3,6 @@ package com.clay.ge.shape;
 import com.clay.ge.render.*;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 public class GameEllipse extends GameShape {
     private float x, y, width, height;
