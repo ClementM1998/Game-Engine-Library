@@ -38,6 +38,10 @@ public class GameColor {
         this(255, red, green, blue);
     }
 
+    public GameColor(int alpha, GameColor color) {
+        this(alpha, color.getRed(), color.getGreen(), color.getBlue());
+    }
+
     public GameColor(float alphaF, float redF, float greenF, float blueF) {
         this.alpha = clamp((int) (alphaF * 255));
         this.red = clamp((int) (redF * 255));
@@ -47,6 +51,10 @@ public class GameColor {
 
     public GameColor(float redF, float greenF, float blueF) {
         this(255, redF, greenF, blueF);
+    }
+
+    public GameColor(float alphaF, GameColor color) {
+        this(alphaF, (float) color.getRed(), (float) color.getGreen(), (float) color.getBlue());
     }
 
     public GameColor(int hex) {
@@ -82,6 +90,22 @@ public class GameColor {
             this.green = (int) ((value >> 8) & 0xFF);
             this.blue = (int) ((value & 0xFF));
         } else throw new IllegalArgumentException("Hex mesti 6 atau 8 digit selepas '#'");
+    }
+
+    public int getAlpha() {
+        return (toARGB() >> 24) & 0xFF;
+    }
+
+    public int getRed() {
+        return (toARGB() >> 16) & 0xFF;
+    }
+
+    public int getGreen() {
+        return (toARGB() >> 8) & 0xFF;
+    }
+
+    public int getBlue() {
+        return (toARGB() >> 0) & 0xFF;
     }
 
     private int clamp(int value) {
