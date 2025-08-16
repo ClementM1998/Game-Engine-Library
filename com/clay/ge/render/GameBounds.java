@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class GameBounds {
     private ArrayList<Point> points = new ArrayList<>();
+    private Point collision;
 
     public GameBounds() {}
 
@@ -54,7 +55,9 @@ public class GameBounds {
 
         for (Line2D e1 : edges1) {
             for (Line2D e2 : edges2) {
-                if (e1.intersectsLine(e2)) return true;
+                if (e1.intersectsLine(e2)) {
+                    return true;
+                }
             }
         }
 
